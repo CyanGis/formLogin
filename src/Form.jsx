@@ -8,7 +8,7 @@ export default function Form() {
     const schema =yup.object().shape({
         name: yup.string().required("El nombre es requerido"),
         email: yup.string().required("El correo es requerido").email(),
-        age: yup.number().integer("El dato debe ser entero").required("La edad es requerida").min(18,"Debes ser mayor a 18").typeError(""),
+        age: yup.number("La edad debe ser numerica").integer("El dato debe ser entero").required("La edad es requerida").min(18,"Debes ser mayor a 18").typeError(""),
         phoneNumber: yup.string().required("El numero es requerido"),
         pass: yup.string().required("La contrasena es requerida").min(4, "Debe de contener al menos 4 caracteres").max(10, "Solo se admiten hasta 10 caracteres"),
         confirmPass:yup.string().oneOf([yup.ref("pass"),null], "Las contrasenas deben de coincidir")
