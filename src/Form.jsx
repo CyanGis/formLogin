@@ -35,23 +35,27 @@ export default function Form() {
       }
   }
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" placeholder='Nombre Completo' {...register("name")}/>
-        <p>{errors.name?.message}</p>
-        <input type="text" placeholder='Ingresa Email' {...register("email")}/>
-        <p>{errors.email?.message}</p>
-        <input type="number" placeholder='Edad....' {...register("age")}/>
-        <p>{errors.age?.message}</p>
-        <input type="text" placeholder='Numero Telefonico....' {...register("phoneNumber")}/>
-        <p>{errors.phoneNumber?.message}</p>
-        <input type="password" placeholder='Ingresa Contraseña'{...register("pass")}/>
-        <p>{errors.pass?.message}</p>
-        <input type="password" placeholder='Confirma Contraseña'{...register("confirmPass")}/>
-        <p>{errors.confirmPass?.message}</p>
-        <input type='submit'/>
-      </form>
+  <div>
+        <h2>Registro</h2>
+        <p>Intentos: {attempts}</p>
+        {isLocked ? (
+
+            <p style={{color:"red"}}>Formulario bloqueado</p>
+
+        ):(
+            <form onSubmit={handleSubmit(onSubmit)}>
+            <input type="text" placeholder='Nombre Completo' {...register("name")}/>
+            <p>{errors.name?.message}</p>
+            <input type="text" placeholder='Ingresa Email' {...register("email")}/>
+            <p>{errors.email?.message}</p>
+            <input type="number" placeholder='Edad....' {...register("age")}/>
+            <p>{errors.age?.message}</p>
+            <input type="password" placeholder='Ingresa Contraseña'{...register("pass")}/>
+            <p>{errors.pass?.message}</p>
+            <input type="password" placeholder='Confirma Contraseña'{...register("confirmPass")}/>
+            <p>{errors.confirmPass?.message}</p>
+            <input type='submit'/>
+          </form>    
+        )}
     </div>
-  )
 }
