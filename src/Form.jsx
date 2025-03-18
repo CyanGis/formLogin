@@ -1,9 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import React from 'react'
+import React, {useState} from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 export default function Form() {
+
+    const [attempts, setAttempts] = useState(3);
+    const [isLocked, setIsLocked] = useState(false);
 
     const schema =yup.object().shape({
         name: yup.string().required("El nombre es requerido"),
@@ -19,7 +22,9 @@ export default function Form() {
 
     function onSubmit(data){
         console.log(data)
-        //redirigir al usuario login
+        alert("Registro exitoso");
+        setAttempts(3);//cuando hay logueo exitoso, reinicia los intentos
+        
     }
 
   return (
