@@ -34,8 +34,8 @@ export default function Form() {
           alert("Has alcanzado el numero maximo de intentos, intenta mas tarde")
       }
   }
-
-  <div>
+  return (
+    <div>
         <h2>Registro</h2>
         <p>Intentos: {attempts}</p>
         {isLocked ? (
@@ -58,4 +58,5 @@ export default function Form() {
           </form>    
         )}
     </div>
+  )
 }
