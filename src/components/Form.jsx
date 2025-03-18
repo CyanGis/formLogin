@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import '../../src/index.css'
 import * as yup from 'yup'
 
 
@@ -30,9 +31,13 @@ export default function Form() {
     function onSubmit(data) {
         console.log("datos",data);
         alert("Registro exitoso");
-        navigate('/login')
-        setAttempts(3); // Cuando hay registro exitoso, reinicia los intentos
         setMyData(data);
+        localStorage.setItem("user", JSON.stringify(data))
+        setAttempts(3);
+        navigate('/login')
+       
+      // Cuando hay registro exitoso, reinicia los intentos
+       
         
     }
 
