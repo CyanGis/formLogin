@@ -1,9 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import React from 'react'
+import React, {useState} from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 export default function Form() {
+
+    const [attempts, setAttempts] = useState(3);
+    const [isLocked, setIsLocked] = useState(false);
 
     const schema =yup.object().shape({
         name: yup.string().required("El nombre es requerido"),
@@ -19,26 +22,40 @@ export default function Form() {
 
     function onSubmit(data){
         console.log(data)
-        //redirigir al usuario login
+        alert("Registro exitoso");
+        setAttempts(3);//cuando hay logueo exitoso, reinicia los intentos
     }
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" placeholder='Nombre Completo' {...register("name")}/>
-        <p>{errors.name?.message}</p>
-        <input type="text" placeholder='Ingresa Email' {...register("email")}/>
-        <p>{errors.email?.message}</p>
-        <input type="number" placeholder='Edad....' {...register("age")}/>
-        <p>{errors.age?.message}</p>
-        <input type="text" placeholder='Numero Telefonico....' {...register("phoneNumber")}/>
-        <p>{errors.phoneNumber?.message}</p>
-        <input type="password" placeholder='Ingresa Contraseña'{...register("pass")}/>
-        <p>{errors.pass?.message}</p>
-        <input type="password" placeholder='Confirma Contraseña'{...register("confirmPass")}/>
-        <p>{errors.confirmPass?.message}</p>
-        <input type='submit'/>
-      </form>
+    function handleFailedSubmit(){
+      if (attempts > 1){
+          setAttempts(attempts -1);
+      } else{
+          setIsLocked(true);
+          alert("Has alcanzado el numero maximo de intentos, intenta mas tarde")
+      }
+  }
+
+  <div>
+        <h2>Registro</h2>
+        <p>Intentos: {attempts}</p>
+        {isLocked ? (
+
+            <p style={{color:"red"}}>Formulario bloqueado</p>
+
+        ):(
+            <form onSubmit={handleSubmit(onSubmit)}>
+            <input type="text" placeholder='Nombre Completo' {...register("name")}/>
+            <p>{errors.name?.message}</p>
+            <input type="text" placeholder='Ingresa Email' {...register("email")}/>
+            <p>{errors.email?.message}</p>
+            <input type="number" placeholder='Edad....' {...register("age")}/>
+            <p>{errors.age?.message}</p>
+            <input type="password" placeholder='Ingresa Contraseña'{...register("pass")}/>
+            <p>{errors.pass?.message}</p>
+            <input type="password" placeholder='Confirma Contraseña'{...register("confirmPass")}/>
+            <p>{errors.confirmPass?.message}</p>
+            <input type='submit'/>
+          </form>    
+        )}
     </div>
-  )
 }
