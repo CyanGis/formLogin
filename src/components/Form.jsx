@@ -30,7 +30,7 @@ export default function Form() {
     function onSubmit(data) {
         console.log("datos",data);
         alert("Registro exitoso");
-        
+        navigate('/login')
         setAttempts(3); // Cuando hay registro exitoso, reinicia los intentos
         setMyData(data);
         
