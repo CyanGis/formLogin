@@ -24,8 +24,16 @@ export default function Form() {
         console.log(data)
         alert("Registro exitoso");
         setAttempts(3);//cuando hay logueo exitoso, reinicia los intentos
-        
     }
+
+    function handleFailedSubmit(){
+      if (attempts > 1){
+          setAttempts(attempts -1);
+      } else{
+          setIsLocked(true);
+          alert("Has alcanzado el numero maximo de intentos, intenta mas tarde")
+      }
+  }
 
   return (
     <div>
