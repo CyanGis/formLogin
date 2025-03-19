@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './styles/Login.css'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,13 +13,16 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
+
+  useEffect(() => {
+
+    const data = localStorage.getItem("user")
+  })
   
   function onSubmit(data) {
     console.log("datos",data);
     alert("Registro exitoso");
-    navigate('/login')
- 
-    
+    navigate('/profile');
 }
 
   return (
