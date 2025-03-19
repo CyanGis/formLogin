@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import './App.css';
-import Form from './Form';
+import Form from './components/Form';
+import AppRouter from './router/AppRouter';
 
 function App() {
-  return (
-    <>
-      <Form />
-    </>
-  );
+  return <AppRouter />;
 }
 
 export default App;
